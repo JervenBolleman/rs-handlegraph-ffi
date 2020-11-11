@@ -11,7 +11,7 @@ class PanamaMain {
     // get a native method handle for 'getpid' function
     var getpid = linker.downcallHandle(
            lookup.lookup("node_is_reverse").get(),
-           MethodType.methodType(boolean.class, MemoryAddress.class),
+           MethodType.methodType(byte.class, MemoryAddress.class),
            FunctionDescriptor.of(CLinker.C_CHAR, CLinker.C_POINTER));
 
     // invoke it!
