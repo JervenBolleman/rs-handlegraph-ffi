@@ -30,7 +30,7 @@ pub extern fn node_id(node: &Handle)-> NodeId {
 
 // #[no_mangle]
 // pub extern fn edge_left(edge: &Edge)-> NodeId {
-//     return edge.left;
+//     return edge.;
 // }
 
 // #[no_mangle]
@@ -88,7 +88,43 @@ pub extern fn handle_graph_handles_iterator<'a>(graph: &'a dyn HandleGraph) -> B
     return graph.handles_iter();
 }
 
+#[no_mangle] 
+pub extern fn handles_iterator_next(mut iterator: Box<dyn Iterator<Item = Handle>>) -> Option<Handle> {
+    return iterator.next();
+}
+
+#[no_mangle] 
+pub extern fn handles_iterator_isdone(handle: Option<Handle>) -> bool {
+    return None != handle;
+}
+
+#[no_mangle] 
+pub extern fn handles_from_option(option: Option<Handle>) -> Handle {
+    match option {
+        Some(p) => return p,
+        None => panic!("has no value"),
+    }
+}
+
 #[no_mangle]
 pub extern fn handle_graph_edges_iterator<'a>(graph: &'a dyn HandleGraph) -> Box<dyn Iterator<Item = Edge> + 'a> {
     return graph.edges_iter();
+}
+
+#[no_mangle] 
+pub extern fn edges_iterator_next(mut iterator: Box<dyn  Iterator<Item = Edge>>) -> Option<Edge> {
+    return iterator.next();
+}
+
+#[no_mangle] 
+pub extern fn edges_iterator_isdone(edge: Option<Edge>) -> bool {
+    return None != edge;
+}
+
+#[no_mangle] 
+pub extern fn edge_from_option(option: Option<Edge>) -> Edge {
+    match option {
+        Some(p) => return p,
+        None => panic!("has no value"),
+    }
 }
