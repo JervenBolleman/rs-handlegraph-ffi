@@ -2,6 +2,7 @@ extern crate handlegraph;
 
 use handlegraph::handle::Handle;
 use handlegraph::handle::Edge;
+use handlegraph::handle::Direction;
 use handlegraph::handle::NodeId;
 use handlegraph::handlegraph::HandleGraph;
 use handlegraph::hashgraph::HashGraph;
@@ -127,4 +128,14 @@ pub extern fn edge_from_option(option: Option<Edge>) -> Edge {
         Some(p) => return p,
         None => panic!("has no value"),
     }
+}
+
+#[no_mangle]
+pub extern fn handle_edges_iter_right<'a>(graph: &'a dyn HandleGraph, handle: Handle) -> Box<dyn Iterator<Item = Handle> + 'a> {
+    return graph.handle_edges_iter(handle, Direction::Right);
+}
+
+#[no_mangle]
+pub extern fn handle_edges_iter_left<'a>(graph: &'a dyn HandleGraph, handle: Handle) -> Box<dyn Iterator<Item = Handle> + 'a> {
+    return graph.handle_edges_iter(handle, Direction::Left);
 }
