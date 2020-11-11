@@ -5,7 +5,6 @@ authors = ["Jerven bolleman <jerven.bolleman@sib.swiss>"]
 edition = "2018"
 keywords = ["ffi", "handlegraph", "biohackeu20", "bioinformatics"]
 
-
 [dependencies]
 jni = "0.18.0"
 handlegraph = "0.5.0"
