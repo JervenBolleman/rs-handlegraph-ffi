@@ -1,5 +1,3 @@
-extern crate handlegraph;
-
 use handlegraph::handle::Handle;
 use handlegraph::handle::Edge;
 use handlegraph::handle::Direction;
@@ -8,10 +6,12 @@ use handlegraph::handlegraph::HandleGraph;
 use handlegraph::hashgraph::HashGraph;
 use handlegraph::pathgraph::PathHandleGraph;
 use handlegraph::mutablehandlegraph::MutableHandleGraph;
+use handlegraph;
 
 use gfa::{
     gfa::{Link, Segment, GFA},
     optfields::OptFields,
+    parser::{GFAParser, GFAResult},
 };
 
 #[no_mangle]
@@ -44,9 +44,20 @@ pub extern fn hash_graph_new() -> HashGraph {
     return HashGraph::new();
 }
 
+#[no_mangle]
+pub extern fn parse_gfa_into_hash_graph(file: &str) -> HashGraph {
+    let parser = GFAParser::new();
+    let gfa: GFA<usize, ()> = parser.parse_file(file).unwrap();
+    let hashgraph = HashGraph::from_gfa(&gfa);
+    return hashgraph;
+}
+
 // #[no_mangle]
-// pub extern fn hash_graph_from_gfa(gfa: &GFA<usize, Any>) -> HashGraph {
-//     return HashGraph::from_gfa(gfa);
+// pub extern fn parse_gfa_into_path_graph(file: &str) -> HashGraph {
+//     let parser = GFAParser::new();
+//     let gfa: GFA<usize, ()> = parser.parse_file(file).unwrap();
+//     let hashgraph = conversion::from_gfa::<PathGraph, _>(&gfa);
+//     return hashgraph;
 // }
 
 #[no_mangle]
