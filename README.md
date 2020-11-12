@@ -13,5 +13,11 @@ Uses early access build of project panama
     --add-modules jdk.incubator.foreign \
     src/main/java/swiss/sib/swissprot/libhandlegraph-panama.java
 ```
+```
+jextract  -C -x -C c++ \
+    -l $(pwd)/target/debug/librs_handlegraph_ffi.so \
+    -t rs.handlegraph \
+    libhandlegraph-ffi-c.h 
+```
 
 

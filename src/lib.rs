@@ -8,6 +8,9 @@ use gfa::{
     parser::{GFAParser, GFAResult},
 };
 
+
+
+#[repr(C)]
 pub struct CGraph {
     graph: HashGraph,
 }
