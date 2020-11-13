@@ -21,6 +21,7 @@ jobs:
           command: build
   jextract:
     needs: build_and_test
+    runs-on: ubuntu-latest
     name: jextract
     steps:
       - uses: wei/curl@master
