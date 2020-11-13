@@ -27,7 +27,7 @@ jobs:
     steps:
       - run: sudo apt-get install curl
       - run: curl "https://download.java.net/java/early_access/panama/2/openjdk-16-panama+2-193_linux-x64_bin.tar.gz"  --output "$HOME/openjdk-16-panama+2-193_linux-x64_bin.tar.gz" --etag-save ~/panama.tar.etag 
-      - run: tar xzvf "$HOME/openjdk-16-panama+2-193_linux-x64_bin.tar.gz"
+      - run: cd $HOME && tar xzvf "$HOME/openjdk-16-panama+2-193_linux-x64_bin.tar.gz"
       - run: ls $HOME
       - run: ls $HOME/jdk-16
       - run: $HOME/jdk-16/bin/jextract -l rs_handlegraph_ffi -t rs.handlegraph -d java_classes libhandlegraph-ffi-c.h
