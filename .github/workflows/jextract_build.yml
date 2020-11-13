@@ -25,7 +25,7 @@ jobs:
     name: jextract
     steps:
       - run: sudo apt-get install curl
-      - run: curl@master "https://download.java.net/java/early_access/panama/2/openjdk-16-panama+2-193_linux-x64_bin.tar.gz"  --output "$HOME/openjdk-16-panama+2-193_linux-x64_bin.tar.gz" --etag-save ~/panama.tar.etag 
+      - run: curl "https://download.java.net/java/early_access/panama/2/openjdk-16-panama+2-193_linux-x64_bin.tar.gz"  --output "$HOME/openjdk-16-panama+2-193_linux-x64_bin.tar.gz" --etag-save ~/panama.tar.etag 
       - name: ls home
         run: ls ~/
       - uses: actions/checkout@v2
