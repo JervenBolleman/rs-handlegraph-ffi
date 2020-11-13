@@ -22,7 +22,7 @@ jobs:
           command: build
   jextract:
     needs: build_and_test
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
     name: jextract
     steps:
       - run: sudo apt-get install curl
