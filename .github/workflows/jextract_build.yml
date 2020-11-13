@@ -1,0 +1,21 @@
+on: [push]
+
+jobs:
+  build_and_test:
+    name: cargo build and jextract
+    runs-on: ubuntu-latest
+    steps:
+      - name: cargo build
+        - uses: actions/checkout@v2
+        - uses: actions-rs/toolchain@v1
+          with:
+            toolchain: stable
+        - uses: actions-rs/cargo@v1
+          with:
+            command: build
+      - name: jextract
+        - uses: actions/checkout@v2
+        - uses: actions/setup-java@v1
+        with:
+          java-version: 16.0.0-ea.2
+      - run: jextract -l rs_handlegraph_ffi -t rs.handlegraph -d java_classes libhandlegraph-ffi-c.h
