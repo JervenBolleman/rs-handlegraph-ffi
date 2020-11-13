@@ -8,11 +8,10 @@ use gfa::{
     parser::{GFAParser, GFAResult},
 };
 
-
-
 #[repr(C)]
 pub struct CGraph {
-    graph: HashGraph,
+    graph: *const dyn HandleGraph,
+    paths: *const dyn PathHandleGraph<PathHandle=i64,StepHandle=PathStep>,
 }
 
 #[repr(C)]
@@ -44,27 +43,27 @@ impl CGraph {
         let parser = GFAParser::new();
         let gfa: GFA<usize, ()> = parser.parse_file(file).unwrap();
         let hashgraph = HashGraph::from_gfa(&gfa);
-        CGraph { graph: hashgraph }
+        CGraph { graph: &hashgraph, paths: &hashgraph }
     }
 
-    pub fn handles(&self) -> HandlesIter<'_> {
-        let iter = self.graph.handles_iter();
+    pub unsafe fn handles(&self) -> HandlesIter<'_> {
+        let iter = (*self.graph).handles_iter();
         HandlesIter {
             finished: false,
             iter,
         }
     }
 
-    pub fn edges(&self) -> EdgesIter<'_> {
-        let iter = self.graph.edges_iter();
+    pub unsafe fn edges(&self) -> EdgesIter<'_> {
+        let iter = (*self.graph).edges_iter();
         EdgesIter {
             finished: false,
             iter,
         }
     }
 
-    pub fn paths(&self) -> PathsIter<'_> {
-        let iter = self.graph.paths.keys();
+    pub unsafe fn paths(&self) -> PathsIter<'_> {
+        let iter = (*self.paths).paths_iter();
         PathsIter {
             finished: false,
             iter: Box::new(iter),
