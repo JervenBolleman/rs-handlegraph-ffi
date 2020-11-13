@@ -30,4 +30,4 @@ jobs:
       - run: cd $HOME && tar xzvf "$HOME/openjdk-16-panama+2-193_linux-x64_bin.tar.gz"
       - run: ls $HOME
       - run: ls $HOME/jdk-16
-      - run: $HOME/jdk-16/bin/jextract -l rs_handlegraph_ffi -t rs.handlegraph -d java_classes libhandlegraph-ffi-c.h
+      - run: cd $GITHUB_WORKSPACE && $HOME/jdk-16/bin/jextract -l rs_handlegraph_ffi -t rs.handlegraph -d java_classes libhandlegraph-ffi-c.h
