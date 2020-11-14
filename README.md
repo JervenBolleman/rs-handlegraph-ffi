@@ -5,7 +5,7 @@ Make it easy to access rs-handlegraph implementations in an other language.
 
 # java
 
-Uses early access build of project panama
+Uses early access build of project panama e.g. 
 
 ```
  ~/bin/jdk-16/bin/java \
@@ -14,10 +14,15 @@ Uses early access build of project panama
     src/main/java/swiss/sib/swissprot/libhandlegraph-panama.java
 ```
 ```
-jextract  -C -x -C c++ \
-    -l $(pwd)/target/debug/librs_handlegraph_ffi.so \
+jextract \
+    -l rs_handlegraph_ffi \
+    -d target/java_classes \
     -t rs.handlegraph \
     libhandlegraph-ffi-c.h 
+```
+
+```
+jar cvf rs-handlegraph.jar -C target/java_classes/ .
 ```
 
 
