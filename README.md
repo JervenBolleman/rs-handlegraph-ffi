@@ -24,5 +24,8 @@ jextract \
 ```
 jar cvf rs-handlegraph.jar -C target/java_classes/ .
 ```
+# install into local mvn
+
+mvn install:install-file  -DgroupId=rs.handlegraph -DartifactId=jextract -Dpackaging=jar -Dversion=0.0.1 -Dfile=rs-handlegraph.jar
 
 
