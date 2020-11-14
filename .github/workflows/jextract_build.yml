@@ -24,4 +24,4 @@ jobs:
       - run: curl "https://download.java.net/java/early_access/panama/2/openjdk-16-panama+2-193_linux-x64_bin.tar.gz"  --output "$HOME/jdk-16.tar.gz" --etag-save jdk-16.tar.gz.etag --etag-compare jdk-16.tar.gz.etag
       - run: cd $HOME && tar xzvf "$HOME/jdk-16.tar.gz"
       - run: cd $GITHUB_WORKSPACE && $HOME/jdk-16/bin/jextract -l rs_handlegraph_ffi -t rs.handlegraph -d target/java_classes libhandlegraph-ffi-c.h
-      - run: jar cvf rs-handlegraph.jar -C target/java_classes/ .
+      - run: $HOME/jdk-16/bin/jar cvf rs-handlegraph.jar -C target/java_classes/ .
